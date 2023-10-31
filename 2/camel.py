@@ -1,17 +1,17 @@
+# get input name
 def main():
-    # get input name
     names = input("camelCase: ")
 
-# loop through each letter
-    for name in names:
-        if
+    # print snakecase
+    print('snake_case: ', end="")
 
-#  check if upper case
-
-
-# print underscore and letter lower case
-
-
-# otherwise print letter
-
-# print space in the end
+    # loop through each letter
+    for char in names:
+    #  check if upper case
+        if char.isupper():
+    # print underscore and letter lower case
+            print('_' + char.lower(), end='')
+    # otherwise print letter
+        else:
+            print(char, end="")
+main()
