@@ -5,7 +5,7 @@ def main():
     while True:
         try:
             # Prompt user for input
-            date_input = input("Enter a date (MM/DD/YYYY or Month DD, YYYY): ").strip()
+            date_input = input("Date: ").strip()
 
             # Try to parse the date and convert it to ISO 8601 format
             converted_date = convert_date(date_input, months)
@@ -13,7 +13,7 @@ def main():
                 print(converted_date)
                 break
             else:
-                print("Invalid date. Please try again.")
+                continue
         except EOFError:
             break
 
@@ -23,16 +23,25 @@ def convert_date(date_str, months):
         if '/' in date_str:
             month, day, year = map(int, date_str.split('/'))
         # Check if date is in full month name format
-        elif ',' in date_str and any(month_name in date_str for month_name in months):
-            month_str, rest = date_str.split(' ', 1)
-            day, year = map(int, rest.replace(',', '').split())
-            month = months.index(month_str) + 1
+        elif ',' in date_str:
+            parts = date_str.split()
+            if len(parts) == 3 and parts[1].replace(',', '').isdigit() and parts[2].isdigit():
+                month_str = parts[0]
+                day = int(parts[1].replace(',', ''))
+                year = int(parts[2])
+
+                if month_str in months:
+                    month = months.index(month_str) + 1
+                else:
+                    return None
+            else:
+                return None
         else:
             return None
 
         # Validate month and day ranges
         if 1 <= month <= 12 and 1 <= day <= 31:
-            return f"{year:04d}-{month:02d}-{day:02d}"
+            return f"date: {year:04d}-{month:02d}-{day:02d}"
         else:
             return None
     except ValueError:
