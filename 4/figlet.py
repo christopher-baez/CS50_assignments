@@ -1,8 +1,8 @@
-from pyfiglet import figlet
+from pyfiglet import Figlet
 import random
 import sys
 
-figlet = figlet()
+figlet = Figlet()
 
 if len(sys.argv) == 1:
     RanFont = True
