@@ -3,6 +3,7 @@ def main():
     print(f'Output: {shorten(word)}')
 
 def shorten(word):
+    word = word.lower().strip()
     vowels = list('aeiou')
     result = ''
     for x in word:
